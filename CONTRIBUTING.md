@@ -184,7 +184,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/) prefixes:
 
 ## Writing Documentation
 
-Omega uses flat Markdown files in the [`docs/`](http://docs/) directory. Documentation is organized by prefix:
+Omega uses flat Markdown files in the [`docs/`](docs/) directory. Documentation is organized by prefix:
 
 | Prefix | Type | Example |
 | :---- | :---- | :---- |
