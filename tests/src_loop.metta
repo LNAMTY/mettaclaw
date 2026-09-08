@@ -15,3 +15,12 @@
 ; Flag on: HISTORY moves ahead of the volatile results section.
 !(test (orderedContextSections True "RESULT" "HIST")
        (" HISTORY: " "HIST" " LAST_SKILL_USE_RESULTS: " "RESULT"))
+
+; The flag can arrive as a string (command line, environment variable or config
+; file all deliver strings), a symbol or a boolean; is_true accepts all of them so
+; operators can actually turn it on, not only by editing the default.
+!(test (== (py-call (helper.is_true "True")) 1) True)
+!(test (== (py-call (helper.is_true "true")) 1) True)
+!(test (== (py-call (helper.is_true "False")) 1) False)
+!(test (== (py-call (helper.is_true True)) 1) True)
+!(test (== (py-call (helper.is_true False)) 1) False)

@@ -52,9 +52,16 @@
 ; the prefix stays byte-identical and can be served from cache. Default is off, in which
 ; case the tail is byte-for-byte identical to the original layout.
 (= (contextVolatileTail)
-   (py-str (orderedContextSections (stableContextOrder)
+   (py-str (orderedContextSections (stableContextEnabled)
                                    (last_chars (get-state &lastresults) (maxFeedback))
                                    (getHistory))))
+
+; True when the operator has turned stable ordering on. The flag can arrive as a
+; string (command line, environment variable or config file all deliver strings),
+; a symbol, or a boolean, so normalise it through helper.is_true instead of
+; comparing against the True symbol directly.
+(= (stableContextEnabled)
+   (== (py-call (helper.is_true (stableContextOrder))) 1))
 
 ; Section ordering, kept separate from the state reads and the py-str call so it
 ; can be checked on its own. Returns the sections as a plain tuple. Flag off keeps
