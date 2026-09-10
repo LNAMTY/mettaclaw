@@ -75,7 +75,7 @@ Run Omega using the next command:
 curl -fsSL https://raw.githubusercontent.com/singnet/Omega/refs/heads/main/scripts/omega | bash -s -- singularitynet/omega:latest
 ```
 
-To run a specific version of Omega set version in `TAG` environment variable and run the following command:
+To run a specific version of Omega (v0.1.20 or later) set version in `TAG` environment variable and run the following command:
 ```
 export TAG=<version>; curl -fsSL  https://github.com/singnet/Omega/raw/refs/tags/$TAG/scripts/omega | bash -s -- singularitynet/omega:$TAG
 ```
@@ -90,8 +90,9 @@ To restart the Omega Docker container:
 docker start omega
 ```
 
-To reset Omega's memory:
+To reset Omega's memory, remove the container together with its memory volume and then run Omega again:
 ```
+docker rm -f omega
 docker volume rm omega-memory
 ```
 
@@ -110,7 +111,7 @@ To restore an archive while upgrading to a tagged image, use the same transfer d
 ```sh
 scripts/omega start -d singularitynet/omega:<tag> -p OpenAI -t telegram \
   --memory-transfer-dir "$HOME/omega-transfers" \
-  --memory-import omegaclaw-memory-<timestamp>.tar.gz \
+  --memory-import omega-memory-<timestamp>.tar.gz \
   --memory-mode overwrite
 ```
 
